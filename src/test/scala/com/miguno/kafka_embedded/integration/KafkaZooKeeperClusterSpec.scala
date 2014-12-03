@@ -4,7 +4,7 @@ import java.util.Properties
 import java.util.concurrent.Executors
 
 import _root_.kafka.message.MessageAndMetadata
-import com.miguno.kafka_embedded.kafka.{EmbeddedKafkaZooKeeperCluster, KafkaTopic}
+import com.miguno.kafka_embedded.kafka.{KafkaZooKeeperCluster, KafkaTopic}
 import com.miguno.kafka_embedded.logging.LazyLogging
 import kafka.consumer.{Consumer, ConsumerConfig}
 import kafka.producer.{KeyedMessage, Producer, ProducerConfig}
@@ -25,7 +25,7 @@ class KafkaZooKeeperClusterSpec extends FunSpec with Matchers with GivenWhenThen
       And("a Kafka broker instance")
       And("a Kafka topic")
       val topicName = "testing"
-      val cluster = new EmbeddedKafkaZooKeeperCluster(topics = Seq(KafkaTopic(topicName)))
+      val cluster = new KafkaZooKeeperCluster(topics = Seq(KafkaTopic(topicName)))
       cluster.start()
       And("some words")
       val words = Seq("protoss", "terran", "zerg")

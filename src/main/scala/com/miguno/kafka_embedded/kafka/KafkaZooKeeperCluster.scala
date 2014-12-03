@@ -14,7 +14,7 @@ import org.apache.curator.test.InstanceSpec
  * @param topics Kafka topics to be created
  * @param brokerConfig Kafka broker configuration
  */
-class EmbeddedKafkaZooKeeperCluster(zookeeperPort: Integer = InstanceSpec.getRandomPort,
+class KafkaZooKeeperCluster(zookeeperPort: Integer = InstanceSpec.getRandomPort,
                                     kafkaPort: Integer = InstanceSpec.getRandomPort,
                                     topics: Seq[KafkaTopic] = Seq(),
                                     brokerConfig: Properties = new Properties) extends LazyLogging {
