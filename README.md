@@ -53,20 +53,20 @@ This project is published via [Sonatype](https://oss.sonatype.org/).
   [https://oss.sonatype.org/content/repositories/snapshots](https://oss.sonatype.org/content/repositories/snapshots)
 * Releases are available on [Maven Central](http://search.maven.org/).
 
-Example 1, using a release:
-
-```scala
-// In build.sbt
-libraryDependencies ++= Seq("com.miguno" % "kafka_embedded_2.10" % "0.1.0")
-```
-
-Example 2, using a snapshot:
+Example 1, using a snapshot:
 
 ```scala
 // In build.sbt
 resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
 
 libraryDependencies ++= Seq("com.miguno" % "kafka_embedded_2.10" % "0.1.0-SNAPSHOT")
+```
+
+Example 2, using a release (note: no release has been published yet!):
+
+```scala
+// In build.sbt
+libraryDependencies ++= Seq("com.miguno" % "kafka_embedded_2.10" % "0.1.0")
 ```
 
 
