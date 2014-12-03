@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+  The `PatternLayout` documentation of logback explains how you can customize the encoder patterns below.
+  See http://logback.qos.ch/manual/layouts.html#ClassicPatternLayout
+-->
+<configuration scan="true" scanPeriod="60 seconds">
+
+ <appender name="A1" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %c [%p] %m%n</pattern>
+    </encoder>
+ </appender>
+
+  <root level="ERROR">
+    <appender-ref ref="A1"/>
+  </root>
+
+  <logger name="com.miguno" additivity="false" >
+    <level value="WARN"/>
+    <appender-ref ref="A1"/>
+  </logger>
+
+  <!--
+    Squelch CuratorFrameworkImpl to prevent the following error messages from polluting our test output:
+
+        # Note: This is due to a CONNECTION LOSS.
+        2014-09-16 13:53:11 o.a.c.f.i.CuratorFrameworkImpl [ERROR] Background operation retry gave up
+        org.apache.zookeeper.KeeperException$ConnectionLossException: KeeperErrorCode = ConnectionLoss
+          at org.apache.zookeeper.KeeperException.create(KeeperException.java:99) ~[zookeeper-3.4.5.jar:3.4.5-1392090]
+
+    These messages may be logged (directly or indirectly) because of ZK timeouts in storm-kafka, i.e. Storm's built-in
+    KafkaSpout we are using to read Kafka data into our Storm topologies.  It is unclear whether we can prevent those
+    messages in the first place as we are not certain yet what causes them.
+  -->
+  <logger name="org.apache.curator.framework.imps.CuratorFrameworkImpl" additivity="false" >
+    <level value="OFF"/>
+    <appender-ref ref="A1"/>
+  </logger>
+
+</configuration>
