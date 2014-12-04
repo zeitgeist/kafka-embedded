@@ -1,4 +1,4 @@
-# kafka-embedded
+# kafka-embedded [![Build Status](https://travis-ci.org/miguno/kafka-embedded.png?branch=develop)](https://travis-ci.org/miguno/kafka-embedded)
 
 Runs embedded, in-memory [Apache Kafka](http://kafka.apache.org) and [Apache ZooKeeper](http://zookeeper.apache.org)
 instances.  Helpful for integration testing.
