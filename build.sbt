@@ -35,7 +35,7 @@ libraryDependencies ++= Seq(
   // Logback with slf4j facade
   "ch.qos.logback" % "logback-classic" % "1.1.2",
   // Test dependencies
-  "org.scalatest" %% "scalatest" % "2.2.1" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.2" % "test"
 )
 
 // Required IntelliJ workaround.  This tells `sbt gen-idea` to include scala-reflect as a compile dependency (and not
