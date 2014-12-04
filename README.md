@@ -47,6 +47,15 @@ With this project you can run in-memory instances of:
 
 ## Build dependencies
 
+You must add two dependencies to use this project:
+
+1. The dependency for kafka-embedded itself, see below for details.
+2. The dependency for the specific Kafka version 0.8+ you want to use.  (Kafka-embedded sets its Kafka dependency to
+   "provided" so that users can pull in whichever Kafka version they need.)
+
+
+### Step 1: Adding a dependency for kafka-embedded
+
 This project is published via [Sonatype](https://oss.sonatype.org/).
 
 * Snapshots are available in the Maven repository at
@@ -68,6 +77,20 @@ Example 2, using a release (note: no release has been published yet!):
 // In build.sbt
 libraryDependencies ++= Seq("com.miguno" % "kafka_embedded_2.10" % "0.1.0")
 ```
+
+### Step 2: Adding a dependency for Apache Kafka
+
+You also need to pick a specific version of Kafka for your build.
+
+Example:
+
+```scala
+// In build.sbt
+libraryDependencies ++= Seq("org.apache.kafka" %% "kafka" % "0.8.1.1")
+```
+
+In many cases you want to exclude certain transitive dependencies of Kafka, e.g. Zookeeper.
+See [build.sbt](build.sbt) for an example list of such excludes for Kafka.
 
 
 ## Examples
