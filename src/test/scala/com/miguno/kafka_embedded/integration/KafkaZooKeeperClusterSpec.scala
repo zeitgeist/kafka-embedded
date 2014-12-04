@@ -4,7 +4,7 @@ import java.util.Properties
 import java.util.concurrent.Executors
 
 import _root_.kafka.message.MessageAndMetadata
-import com.miguno.kafka_embedded.kafka.{KafkaZooKeeperCluster, KafkaTopic}
+import com.miguno.kafka_embedded.kafka.{KafkaTopic, KafkaZooKeeperCluster}
 import com.miguno.kafka_embedded.logging.LazyLogging
 import kafka.consumer.{Consumer, ConsumerConfig}
 import kafka.producer.{KeyedMessage, Producer, ProducerConfig}
@@ -85,7 +85,7 @@ object StringCodec {
 class ConsumerApp(val zookeeperConnect: String,
                   val topic: String,
                   val numStreams: Int = 1 /* A single thread ensures we see incoming messages in the correct order. */)
-  extends LazyLogging {
+    extends LazyLogging {
 
   private val receivedMessages = new mutable.SynchronizedQueue[String]
   private val executor = Executors.newFixedThreadPool(numStreams)
