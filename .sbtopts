@@ -1,4 +1,2 @@
--J-Xms256m
--J-Xmx512m
 -Djava.awt.headless=true
 -Djava.net.preferIPv4Stack=true
