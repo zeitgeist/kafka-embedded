@@ -1,7 +1,7 @@
 package com.miguno.kafka_embedded.integration
 
 import java.util.Properties
-import java.util.concurrent.Executors
+import java.util.concurrent.{ConcurrentLinkedQueue, Executors}
 
 import _root_.kafka.message.MessageAndMetadata
 import com.miguno.kafka_embedded.kafka.{KafkaTopic, KafkaZooKeeperCluster}
@@ -87,7 +87,7 @@ class ConsumerApp(val zookeeperConnect: String,
                   val numStreams: Int = 1 /* A single thread ensures we see incoming messages in the correct order. */)
     extends LazyLogging {
 
-  private val receivedMessages = new mutable.SynchronizedQueue[String]
+  private val receivedMessages = new ConcurrentLinkedQueue[String]
   private val executor = Executors.newFixedThreadPool(numStreams)
 
   private val consumerConnector = {
@@ -116,7 +116,7 @@ class ConsumerApp(val zookeeperConnect: String,
                 case msg: MessageAndMetadata[_, _] =>
                   logger.debug(s"Consumer thread $threadId received message: " + msg)
                   val word = StringCodec.decode(msg.message())
-                  receivedMessages += word
+                  receivedMessages.add(word)
                 case _ => logger.debug(s"Received unexpected message type from broker")
               }
             }
@@ -127,7 +127,7 @@ class ConsumerApp(val zookeeperConnect: String,
   }
   consumerThreads foreach executor.submit
 
-  def receivedWords: Seq[String] = receivedMessages.toSeq
+  def receivedWords: Seq[String] = receivedMessages.toArray.map(_.asInstanceOf[String]).toSeq
 
   def shutdown() {
     consumerConnector.shutdown()

@@ -2,7 +2,9 @@ organization := "com.miguno"
 
 name := "kafka-embedded"
 
-scalaVersion := "2.10.4"
+crossScalaVersions := Seq("2.10.5", "2.11.7")
+
+//scalaVersion := "2.11.7"
 
 // https://github.com/jrudolph/sbt-dependency-graph
 net.virtualvoid.sbt.graph.Plugin.graphSettings
@@ -12,7 +14,7 @@ resolvers ++= Seq(
   "clojars-repository" at "https://clojars.org/repo"
 )
 
-val kafkaVersion = "0.8.1.1"
+val kafkaVersion = "0.8.2.1"
 
 libraryDependencies ++= Seq(
   // The excludes of jms, jmxtools and jmxri are required as per https://issues.apache.org/jira/browse/KAFKA-974.
@@ -26,22 +28,22 @@ libraryDependencies ++= Seq(
     exclude("log4j", "log4j")
     exclude("org.apache.zookeeper", "zookeeper")
     exclude("com.101tec", "zkclient"),
-  "com.101tec" % "zkclient" % "0.4"
+  "com.101tec" % "zkclient" % "0.6"
     exclude("org.apache.zookeeper", "zookeeper"),
-  "org.apache.curator" % "curator-test" % "2.4.0"
+  "org.apache.curator" % "curator-test" % "2.9.0"
     exclude("org.jboss.netty", "netty")
     exclude("org.slf4j", "slf4j-log4j12"),
   "commons-io" % "commons-io" % "2.4",
   // Logback with slf4j facade
-  "ch.qos.logback" % "logback-classic" % "1.1.2",
+  "ch.qos.logback" % "logback-classic" % "1.1.3",
   // Test dependencies
-  "org.scalatest" %% "scalatest" % "2.2.2" % "test",
-  "org.mockito" % "mockito-all" % "1.9.5" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.5" % "test",
+  "org.mockito" % "mockito-all" % "1.10.19" % "test"
 )
 
 // Required IntelliJ workaround.  This tells `sbt gen-idea` to include scala-reflect as a compile dependency (and not
 // merely as a test dependency), which we need for TypeTag usage.
-libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _)
+//libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _)
 
 
 // ---------------------------------------------------------------------------------------------------------------------

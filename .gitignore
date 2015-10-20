@@ -11,3 +11,7 @@ project/plugins/project/
 
 # Kafka
 logs/*
+
+
+# IDE cruft
+.idea/
