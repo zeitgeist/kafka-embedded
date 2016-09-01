@@ -3,7 +3,8 @@ script:
 language: scala
 scala:
    - 2.10.4
+   - 2.11.8
 
 jdk:
-  - openjdk7
   - oraclejdk7
+  - oraclejdk8

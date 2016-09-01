@@ -5,9 +5,8 @@ import java.util.Properties
 
 import com.miguno.kafka_embedded.logging.LazyLogging
 import kafka.admin.AdminUtils
+import kafka.utils.ZkUtils
 import kafka.server.{KafkaConfig, KafkaServerStartable}
-import kafka.utils.ZKStringSerializer
-import org.I0Itec.zkclient.ZkClient
 import org.apache.commons.io.FileUtils
 
 import scala.concurrent.duration._
@@ -98,11 +97,11 @@ class KafkaEmbedded(config: Properties = new Properties) extends LazyLogging {
     // Note: You must initialize the ZkClient with ZKStringSerializer.  If you don't, then createTopic() will only
     // seem to work (it will return without error).  The topic will exist in only ZooKeeper and will be returned when
     // listing topics, but Kafka itself does not create the topic.
-    val zkClient = new ZkClient(
+    val zkClient = ZkUtils(
       zookeeperConnect,
       sessionTimeout.toMillis.toInt,
       connectionTimeout.toMillis.toInt,
-      ZKStringSerializer)
+      isZkSecurityEnabled = false)
     AdminUtils.createTopic(zkClient, topic, partitions, replication, config)
     zkClient.close()
   }

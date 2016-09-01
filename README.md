@@ -38,7 +38,8 @@ With this project you can run in-memory instances of:
 # Requirements
 
 * Java 7
-* Scala 2.10
+* Scala 2.10+
+* Kafka 0.9.x
 
 
 <a name="Usage"></a>
@@ -50,7 +51,7 @@ With this project you can run in-memory instances of:
 You must add two dependencies to use this project:
 
 1. The dependency for kafka-embedded itself, see below for details.
-2. The dependency for the specific Kafka version 0.8+ you want to use.  (Kafka-embedded sets its Kafka dependency to
+2. The dependency for the specific Kafka version 0.9+ you want to use.  (Kafka-embedded sets its Kafka dependency to
    "provided" so that users can pull in whichever Kafka version they need.)
 
 
@@ -68,14 +69,14 @@ When using a snapshot:
 // In build.sbt
 resolvers ++= Seq("sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
 
-libraryDependencies ++= Seq("com.miguno" % "kafka-embedded_2.10" % "0.1.0-SNAPSHOT")
+libraryDependencies ++= Seq("com.miguno" %% "kafka-embedded" % "0.1.0-SNAPSHOT")
 ```
 
 When using a release (note: no release has been published yet!):
 
 ```scala
 // In build.sbt
-libraryDependencies ++= Seq("com.miguno" % "kafka-embedded_2.10" % "0.1.0")
+libraryDependencies ++= Seq("com.miguno" %% "kafka-embedded" % "0.1.0")
 ```
 
 

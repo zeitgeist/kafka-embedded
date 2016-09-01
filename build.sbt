@@ -2,19 +2,17 @@ organization := "com.miguno"
 
 name := "kafka-embedded"
 
-crossScalaVersions := Seq("2.10.5", "2.11.7")
+crossScalaVersions := Seq("2.10.5", "2.11.8")
 
-//scalaVersion := "2.11.7"
+scalaVersion := "2.11.8"
 
-// https://github.com/jrudolph/sbt-dependency-graph
-net.virtualvoid.sbt.graph.Plugin.graphSettings
 
 resolvers ++= Seq(
   "typesafe-repository" at "http://repo.typesafe.com/typesafe/releases/",
   "clojars-repository" at "https://clojars.org/repo"
 )
 
-val kafkaVersion = "0.8.2.1"
+val kafkaVersion = "0.9.0.1"
 
 libraryDependencies ++= Seq(
   // The excludes of jms, jmxtools and jmxri are required as per https://issues.apache.org/jira/browse/KAFKA-974.
